@@ -79,11 +79,16 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      // takes a number which represents an index in the array of rows
+      // searches that sub-array for a value > 0
+        // if it finds one, returns true
+        // otherwise returns false
       return false; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      // checks the array of possible solutions to see if any of them have conflicts
       return false; // fixme
     },
 
@@ -94,11 +99,16 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      // takes a number which represents an index in the array of rows
+      // searches that sub-array for a value > 0
+        // if it finds one, returns true
+        // otherwise returns false
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      // checks the array of possible solutions to see if any of them have conflicts
       return false; // fixme
     },
 
