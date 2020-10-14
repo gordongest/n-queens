@@ -116,18 +116,41 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      // takes a number which represents an index in the array of rows
-      // searches that sub-array for a value > 0
-        // if it finds one, returns true
-        // otherwise returns false
-      return false; // fixme
+
+      let hasConflict = false;
+
+      const row = this.get(0);
+
+      for (let i = 0; i < row.length; i++) {
+        const current = this.get(i)[colIndex];
+
+        if (current === 1 && hasConflict) {
+          return true;
+        } else if (current === 1) {
+          hasConflict = true;
+        }
+      }
+
+      return false;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      let result = false;
-      return result;
+
+      let hasConflict = false;
+
+      const row = this.get(0);
+
+      for (let i = 0; i < row.length; i++) {
+        hasConflict = this.hasColConflictAt(i);
+        if (hasConflict) {
+          return true;
+        }
+      }
+
+      return false;
     },
+
 
 
 
