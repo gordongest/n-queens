@@ -99,21 +99,14 @@
 
       let result = false;
 
-      // checks the array of possible solutions to see if any of them have conflicts
-      _.each(this.attributes, function(key) {
-        let storage = {};
-        _.each(key, function(index) {
-          if (storage[index] === undefined) {
-            storage[index] = 1;
-          } else {
-            storage[index]++;
-          }
-        });
+      let matrix = this.get(0);
 
-        if (storage[1] > 1) {
-          result = true;
+      for (let i = 0; i < matrix.length; i++) {
+        result = this.hasRowConflictAt(i);
+        if (result) {
+          return true;
         }
-      });
+      }
 
       return result;
     },
