@@ -79,38 +79,22 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      // console.log(this);
-      // takes a number which represents an index in the array of rows
-      // searches that sub-array for a value > 0
-      // if it finds one, returns true
-      // otherwise returns false
 
-      let result = false;
+      let conflict = false;
 
-      // console.log(this.attributes[rowIndex]);
+      const row = this.get(rowIndex);
 
-      let storage = {};
-
-      // checks the array of possible solutions to see if any of them have conflicts
-      _.each(this.attributes[rowIndex], function(index) {
-        // console.log(index);
-        if (storage[index] === undefined) {
-          storage[index] = 1;
-        } else {
-          storage[index]++;
+      for (let i = 0; i < row.length; i++) {
+        if (row[i] === 1 && conflict) {
+          return true;
+        } else if (row[i] === 1) {
+          conflict = true;
         }
-      });
-
-      console.log(storage);
-
-      if (storage[1] > 1) {
-        result = true;
       }
 
-      return result;
+      return false;
     },
 
-    // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
 
       let result = false;
