@@ -81,18 +81,53 @@
     hasRowConflictAt: function(rowIndex) {
       // takes a number which represents an index in the array of rows
       // searches that sub-array for a value > 0
-        // if it finds one, returns true
-        // otherwise returns false
+      // if it finds one, returns true
+      // otherwise returns false
+
+      // let storage = {};
+
+      // _.each(this.atrributes[rowIndex], function(index) {
+      //   console.log(index);
+      //   if (storage[index] === undefined) {
+      //     storage [index] = 1;
+      //   } else {
+      //     storage[index]++;
+      //   }
+      // });
+
+      // _.each(storage, function(key) {
+      //   if (storage['1'] > 1) {
+      //     return true;
+      //   }
+      // });
+
       return false; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      console.log(this);
+
+      let result = false;
+
       // checks the array of possible solutions to see if any of them have conflicts
-      return false; // fixme
+      _.each(this.attributes, function(key) {
+        let storage = {};
+        _.each(key, function(index) {
+          if (storage[index] === undefined) {
+            storage[index] = 1;
+          } else {
+            storage[index]++;
+          }
+        });
+
+        if (storage[1] > 1) {
+          result = true;
+        }
+      });
+
+      return result;
     },
-
-
 
     // COLUMNS - run from top to bottom
     // --------------------------------------------------------------
@@ -108,8 +143,8 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      // checks the array of possible solutions to see if any of them have conflicts
-      return false; // fixme
+      let result = false;
+      return result;
     },
 
 
