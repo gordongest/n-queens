@@ -165,8 +165,11 @@
 
       for (let i = 0; i < len; i++) {
         const row = this.get(i);
+
         if (row[colIndex] === 1 && hasConflict) {
+
           return true;
+
         } else if (row[colIndex] === 1) {
           hasConflict = true;
         }

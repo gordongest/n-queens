@@ -16,13 +16,38 @@
 
 
 window.findNRooksSolution = function(n) {
-  // generate board
-  let board = new Board({n: n});
-  console.log('board:', board);
 
-  // .togglePiece(row, col)
-  board.togglePiece(1, 2);
-  console.log('rows:', board.rows());
+  const board = new Board({ n: n });
+
+  let count = n;
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      board.togglePiece(i, j);
+      count--;
+
+      if (board.hasAnyRooksConflicts()) {
+        board.togglePiece(i, j);
+        count++;
+      }
+
+      if (!count) {
+        console.log(
+          'Single solution for ' + n + ' rooks:',
+          JSON.stringify(board.rows())
+        );
+        return board.rows(i);
+      }
+    }
+  }
+
+  // generate board
+  // let board = new Board({'n': n});
+  // console.log('board:', board);
+
+  // // .togglePiece(row, col)
+  // // board.togglePiece(1, 2);
+  // console.log('rows:', board.rows());
 
   // console.log('board again:', board);
 
@@ -35,61 +60,39 @@ window.findNRooksSolution = function(n) {
   // [0, 0, 0, 0]   if there is any conflict  row3 [1000] [0100] [0010] <- goes to matrix
   // [0, 0, 0, 0]                             row4 [1000] [0100] [0010] [0001] <- goes to matrix
 
-  let sliced = board.rows(0).slice();
-  console.log({sliced});
+  // let sliced = board.rows(0).slice();
+  // console.log({sliced});
 
-  let solutions = [];
+  // let solutions = [];
 
-  let recursiveToggle = (row) => {
-    // iterate through the row
-    for (let i = 0; i < row.length; i++) {
-      // create alias for colPos
-      let colPos = board.rows(row)[i];
-      // toggle the piece at the current pos
-      board.togglePiece(row, colPos);
-      // check the position for conflicts
-      // if none, push this row config to solution matrix at current row index
-      if (!hasAnyRowConflicts() && !hasAnyColumnConflicts()) {
-        solutions[row].push(board.rows(row));
-        recursiveToggle(board.rows(row + 1));
-      }
-    }
-  };
+  // let recursiveToggle = (board.rows(row)) => {
+  //   // iterate through the row
+  //   for (let i = 0; i < row.length; i++) {
+  //     // create alias for colPos
+  //     let colPos = board.rows(row)[i];
+  //     // toggle the piece at the current pos
+  //     board.togglePiece(row, colPos);
+  //     // check the position for conflicts
+  //     // if none, push this row config to solution matrix at current row index
+  //     if (!hasAnyRowConflicts() && !hasAnyColumnConflicts()) {
+  //       solutions[row].push(board.rows(row));
+  //       recursiveToggle(board.rows(row + 1));
+  //     }
+  //   }
+  // };
 
-  recursiveToggle(board.rows(0));
+  // recursiveToggle(board.rows(0));
 
-  return solutions;
-
-
-  // const board = new Board({n: n});
-
-  // let solution;
-
-  // const ineligibleRows = [];
-  // const ineligibleCols = [];
-  // let count = n;
-  // //find a single random start spot in row
-  // for (let i = 0; i < board.length; i++) {
-
-  // }
-
-  // console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
-  // return solution;
+  // return solutions;
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
+// window.countNRooksSolutions = function (n, board, solutions = 0) {
+//   board = board || new Board({ n: n });
+// }
 window.countNRooksSolutions = function(n) {
 
-  var solutionCount = 0;
-
-  // for (let i = 0; i < n ** n; i++) {
-  //   if (findNRooksSolution(n)) {
-  //     solutionCount++;
-  //   }
-  // }
-
-  console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
-  return solutionCount;
+  // return solutionCount;
 };
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
