@@ -206,11 +206,7 @@
       let hasConflict = false;
 
       for (let i = 0; i <= len - 1; i++) {
-        console.log({hasConflict});
         const row = sliced[i];
-        console.log({sliced});
-        console.log({row});
-        console.log({colIndex});
         if (colIndex > -1) {
           if (row[colIndex] === 1 && hasConflict) {
             return true;
