@@ -30,10 +30,10 @@ window.findNRooksSolution = function(n) {
   // at each index, place a rook
   // check for row conflict
   // check for col conflict
-  // [1, 0, 0, 0] -> some array of solutions // row1 [1000] <- goes to matrix
-  // [1, 0, 0, 0] -> some array of solutions // row2 [1000] [0100] <- goes to matrix
-  // [0, 0, 0, 0]   if there is any conflict // row3 [1000] [0100] [0010] <- goes to matrix
-  // [0, 0, 0, 0]                            // row4 [1000] [0100] [0010] [0001] <- goes to matrix
+  // [1, 0, 0, 0] -> some array of solutions  row1 [1000] <- goes to matrix
+  // [1, 0, 0, 0] -> some array of solutions  row2 [1000] [0100] <- goes to matrix
+  // [0, 0, 0, 0]   if there is any conflict  row3 [1000] [0100] [0010] <- goes to matrix
+  // [0, 0, 0, 0]                             row4 [1000] [0100] [0010] [0001] <- goes to matrix
 
   let sliced = board.rows(0).slice();
   console.log({sliced});
