@@ -157,7 +157,7 @@
     //
 
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function (colIndex) {
+    hasMajorDiagonalConflictAt: function(colIndex) {
 
       const len = this.get(0).length;
 
@@ -182,7 +182,7 @@
 
       let hasConflict = false;
 
-      for (let i = -len + 1; i < len; i++) {
+      for (let i = -len + 1; i < len * 2; i++) {
         hasConflict = this.hasMajorDiagonalConflictAt(i);
         if (hasConflict) {
           return true;
@@ -197,19 +197,21 @@
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
-    hasMinorDiagonalConflictAt: function (colIndex) {
+    hasMinorDiagonalConflictAt: function(colIndex) {
       const len = this.rows(0).length;
       // console.log(colIndex);
 
+      const sliced = this.rows(0).slice();
+
       let hasConflict = false;
 
-      for (let i = 0; i < len; i++) {
-        // console.log({ colIndex });
-        const row = this.get(i);
+      for (let i = 0; i <= len - 1; i++) {
+        console.log({hasConflict});
+        const row = sliced[i];
+        console.log({sliced});
         console.log({row});
+        console.log({colIndex});
         if (colIndex > -1) {
-          // console.log({hasConflict});
-          // console.log(row[colIndex]);
           if (row[colIndex] === 1 && hasConflict) {
             return true;
           } else if (row[colIndex] === 1) {
@@ -218,7 +220,6 @@
           colIndex--;
         }
       }
-      // [row2,col3][row3,col2]
 
       return false;
     },
@@ -228,30 +229,17 @@
     hasAnyMinorDiagonalConflicts: function () {
       const len = this.get(0).length;
 
-      let rows = this.rows(0);
-      console.log({rows});
-      let get = this.get(0);
-      console.log({get});
-
-
       let hasConflict = false;
 
-      for (let i = 0; i < len; i++) {
-        console.log(rows[i]);
-        // hasConflict = this.hasMinorDiagonalConflictAt(i);
-        // if (hasConflict) {
-        //   return true;
-        // }
-        for (j = 0; j < len; j++) {
-          hasConflict = this.hasMinorDiagonalConflictAt(rows[i][j]);
-          if (hasConflict) {
-            return true;
-          }
+      for (let i = -len + 1; i < len * 2; i++) {
+        hasConflict = this.hasMinorDiagonalConflictAt(i);
+        if (hasConflict) {
+          return hasConflict;
         }
       }
 
-      return false; // fix me
-    }
+      return hasConflict;
+    },
 
     /*--------------------  End of Helper Functions  ---------------------*/
 
