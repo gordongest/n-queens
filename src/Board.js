@@ -62,7 +62,7 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -119,9 +119,10 @@
 
       let hasConflict = false;
 
-      const row = this.get(0);
+      const len = this.get(0).length;
 
-      for (let i = 0; i < row.length; i++) {
+      for (let i = 0; i < len; i++) {
+
         const current = this.get(i)[colIndex];
 
         if (current === 1 && hasConflict) {
@@ -151,35 +152,93 @@
       return false;
     },
 
-
-
-
     // Major Diagonals - go from top-left to bottom-right
     // --------------------------------------------------------------
     //
+
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+    hasMajorDiagonalConflictAt: function (colIndex) {
+
+      const len = this.get(0).length;
+
+      let hasConflict = false;
+
+      for (let i = 0; i < len; i++) {
+        const row = this.get(i);
+        if (row[colIndex] === 1 && hasConflict) {
+          return true;
+        } else if (row[colIndex] === 1) {
+          hasConflict = true;
+        }
+        colIndex++;
+      }
+
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
-    hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
-    },
+    hasAnyMajorDiagonalConflicts: function () {
+      const len = this.get(0).length;
 
+      let hasConflict = false;
+
+      for (let i = -len + 1; i < len; i++) {
+        hasConflict = this.hasMajorDiagonalConflictAt(i);
+        if (hasConflict) {
+          return true;
+        }
+      }
+
+      return false;
+    },
 
 
     // Minor Diagonals - go from top-right to bottom-left
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
-    hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+    hasMinorDiagonalConflictAt: function (colIndex) {
+      const len = this.get(0).length;
+      // console.log(colIndex);
+
+      let hasConflict = false;
+
+      for (let i = 0; i < len; i++) {
+        console.log({ colIndex });
+        const row = this.get(i);
+        if (colIndex > -1) {
+          // console.log({hasConflict});
+          console.log(row[colIndex]);
+          if (row[colIndex] === 1 && hasConflict) {
+            return true;
+          } else if (row[colIndex] === 1) {
+            hasConflict = true;
+          }
+          colIndex--;
+        }
+      }
+      // [row2,col3][row3,col2]
+
+      return false;
     },
 
+
     // test if any minor diagonals on this board contain conflicts
-    hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+    hasAnyMinorDiagonalConflicts: function () {
+      const len = this.get(0).length;
+
+      // console.log(len);
+
+      let hasConflict = false;
+
+      for (let i = 0; i < len; i++) {
+        hasConflict = this.hasMinorDiagonalConflictAt(i);
+        if (hasConflict) {
+          return true;
+        }
+      }
+
+      return false; // fix me
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
