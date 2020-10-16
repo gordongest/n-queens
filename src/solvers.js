@@ -108,6 +108,7 @@ window.findNRooksSolution = function(n) {
       // if none, push this row config to solution matrix at current row index
       if (!hasAnyRowConflicts() && !hasAnyColumnConflicts()) {
         solutions[row].push(board.rows(row));
+        // recursively run the function on the next row
         recursiveToggle(board.rows(row + 1));
       }
     }
